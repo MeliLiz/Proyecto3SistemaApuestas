@@ -4,11 +4,13 @@ import javax.swing.JOptionPane;
 
 /**
  *Ventana para ingresar a la cuenta del usuario
+ * @author meli
  */
 public class Ingresar extends javax.swing.JFrame {
 
-    static Juego juego;
-    static LogIn ventanaPadre;
+    static Juego juego;//el juego con el que estamos trabajando
+    static LogIn ventanaPadre;//la ventana de logIn
+    
     /**
      * Constructor de la ventana ingresar
      */
@@ -17,7 +19,7 @@ public class Ingresar extends javax.swing.JFrame {
         this.juego=juego;
         this.setLocationRelativeTo(null);
         ventanaPadre=l;
-    }
+    }//FIN DE CONSTRUCTOR
 
     /**
      * Metodo para crear la ventana
@@ -34,7 +36,7 @@ public class Ingresar extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setText("Ingresar");
@@ -124,14 +126,15 @@ public class Ingresar extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Contraseña incorrecta");
             }else{
                 //si el usuario y contaseña son correctas, nos metemos a la sesion de jugador
-                Sesion sesion=new Sesion(jugador,juego);
+                Sesion sesion=new Sesion(jugador,juego,ventanaPadre);
                 sesion.setVisible(true);
-                ventanaPadre.dispose();
+                ventanaPadre.setVisible(false);
                 this.dispose();
             }   
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
-
+     //FIN DE BTNINGRESARACTIONPERFORMED
+     
     /**
      * Metodo de acciones del boton regresar
      * @param evt 
@@ -139,7 +142,8 @@ public class Ingresar extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();//cerrar la ventana actual
     }//GEN-LAST:event_btnRegresarActionPerformed
-
+     //FIN DE BTNREGRESARACTIONPERFORMED
+    
     /**
      * Metodo principal
      * @param args the
@@ -168,13 +172,13 @@ public class Ingresar extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Crear y mostrar la ventana */
+        // Crear y mostrar la ventana
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Ingresar(juego,ventanaPadre).setVisible(true);
             }
         });
-    }
+    }//FIN DEL MAIN
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;

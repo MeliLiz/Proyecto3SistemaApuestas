@@ -2,8 +2,9 @@
 package src.edd;
 
 import java.util.Iterator;
+import java.io.Serializable;
 
-public class Pila<T> extends PushPop<T>{
+public class Pila<T> extends PushPop<T> implements Serializable{
     
     
     /**

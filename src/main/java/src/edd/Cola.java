@@ -1,7 +1,8 @@
 
 package src.edd;
+import java.io.Serializable;
 
-public class Cola<T> extends PushPop<T> {
+public class Cola<T> extends PushPop<T> implements Serializable{
     // Agregar al final.
     public void push(T elemento) {
         if (elemento == null) {

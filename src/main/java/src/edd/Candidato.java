@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 /**
  * Clase de candidatos a jugadores
+ * @author meli
  */
 public class Candidato implements Serializable {
 

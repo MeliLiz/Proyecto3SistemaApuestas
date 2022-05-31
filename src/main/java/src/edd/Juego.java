@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 /**
  * Clase para crear un juego con usuarios y candidatos
+ * @author meli
  */
 public class Juego implements Serializable{
 
@@ -21,7 +22,7 @@ public class Juego implements Serializable{
         candidatos=new Lista<Candidato>();//creamos la lista de candidatos
         agregaCandidatos();//Agregamos los candidatos a la lista de candidatos
         calcularSuma();
-    }
+    }//FIN DE CONSTRUCTOR
 
     /**
      * Metodo para añadir un jugador al arbol de usuarios
@@ -29,7 +30,7 @@ public class Juego implements Serializable{
      */
     public void addJugador(Jugador nuevo){
         arbol.add(nuevo);
-    }
+    }//FIN DE ADDJUGADOR
 
     /**
      * Metodo para buscar un jugador en el arbol de usuarios
@@ -38,7 +39,7 @@ public class Juego implements Serializable{
      */
     public boolean buscar(Jugador j){
         return arbol.buscaElemento(j);
-    }
+    }//FIN DE BUSCAR
 
     /**
      * Metodo que regresa al jugador si la contraseña es correcta, regresa null en otro caso
@@ -53,7 +54,7 @@ public class Juego implements Serializable{
         }else{
             return null;
         }
-    }
+    }//FIN DE VERIFICAPASSWORD
 
     /**
      * Metodo para agregar candidatos a la lista de candidatos
@@ -83,8 +84,9 @@ public class Juego implements Serializable{
             }
             iterador=candidatos.iteradorLista();
         }
-    }
+    }//FIN DE AGREGACANDIDATOS
     
+    //Metodo para calcular la suma de las habilidades de los candidatos
     private void calcularSuma(){
         Iterator<Candidato> it=candidatos.iterator();
         int suma=0;
@@ -93,7 +95,7 @@ public class Juego implements Serializable{
             suma+=it.next().habilidad;
         }
         sumaHabilidades=suma;
-    }
+    }//FIN DE CALCULARSUMA
 
 }
 

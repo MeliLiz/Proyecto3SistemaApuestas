@@ -2,8 +2,9 @@
 package src.edd;
 
 import java.util.NoSuchElementException;
+import java.io.Serializable;
 
-public abstract class PushPop<T> {
+public abstract class PushPop<T> implements Serializable{
     // Clase Nodo
     protected class Nodo {
         public T elemento;

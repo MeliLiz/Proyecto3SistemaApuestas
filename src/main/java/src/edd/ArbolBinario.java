@@ -4,6 +4,7 @@ package src.edd;
 import java.util.NoSuchElementException;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -15,11 +16,11 @@ import java.util.Iterator;
  * deja la implementación de varias en manos de las subclases concretas.
  * </p>
  */
-public abstract class ArbolBinario<T> implements Collection<T> {
+public abstract class ArbolBinario<T> implements Collection<T>, Serializable {
     /**
      * Clase interna protegida para vértices.
      */
-    protected class Vertice implements VerticeArbolBinario<T> {
+    protected class Vertice implements VerticeArbolBinario<T>, Serializable {
 
         /** El elemento del vértice. */
         public T elemento;

@@ -3,6 +3,7 @@ package src.edd;
 
 import java.util.NoSuchElementException;
 import java.util.Iterator;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -14,9 +15,9 @@ import java.util.Iterator;
  * árbol siempre es lo más cercano posible a estar lleno.
  * </p>
  */
-public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
+public class ArbolBinarioCompleto<T> extends ArbolBinario<T> implements Serializable{
     /* Clase privada para iteradores de árboles binarios completos. */
-    private class Iterador implements Iterator<T>{
+    private class Iterador implements Iterator<T>, Serializable{
         /* Cola para recorrer los vértices en BFS. */
         private Cola<Vertice> cola;
 

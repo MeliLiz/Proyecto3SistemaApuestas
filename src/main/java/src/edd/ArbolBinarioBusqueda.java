@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class ArbolBinarioBusqueda<T extends Comparable> extends ArbolBinario<T> implements Serializable{
     //#####################################################################################################################################################
     //Clase privada para un iterador de árboles bst
-    private class Iterador implements Iterator<T>{
+    private class Iterador implements Iterator<T>, Serializable{
         //pila para ir almacenando los elemetos. primero los de la izq y luego los de la derecha
         Pila<Vertice> pila=new Pila<Vertice>();
         /**

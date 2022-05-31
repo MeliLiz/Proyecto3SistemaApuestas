@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 /**
  * Interfaz para vértices de árboles binarios.
  */
-public interface VerticeArbolBinario<T> {
+public interface VerticeArbolBinario<T>{
 
     /**
      * Nos dice si el vértice tiene vértice padre.

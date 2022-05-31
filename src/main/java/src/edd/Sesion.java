@@ -6,28 +6,30 @@ import javax.swing.JLabel;
 
 
 /**
- *
- * Clase de la ventana de la sesion del usuario
+ *Clase de la ventana de la sesion del usuario
+ * @author meli
  */
 public class Sesion extends javax.swing.JFrame {
     
-    static Jugador jugador;
-    static Cuenta cuenta;
-    static Juego juego;
+    static Jugador jugador;//El jugador con el que trabajaremos
+    static Cuenta cuenta;//La cuenta del jugador
+    static Juego juego;//El juego con el que estamos trabajando
+    static LogIn login;//La ventana de logIn que abre esta ventana
 
     /**
-     * Creates new form Sesion
+     * Constructor
      * @param jugador
      * @param juego
      */
-    public Sesion(Jugador jugador, Juego juego) {
+    public Sesion(Jugador jugador, Juego juego,LogIn login) {
         initComponents();
         this.jugador=jugador;
         this.cuenta=jugador.cuenta;
         Nombre.setText(jugador.nombreUsuario);
         this.juego=juego;
         this.setLocationRelativeTo(null);
-    }
+        this.login=login;
+    }//FIN DE CONSTRUCTOR
 
     /**
      * Inicializar ventana
@@ -52,6 +54,7 @@ public class Sesion extends javax.swing.JFrame {
         carrera4 = new javax.swing.JLabel();
         carrera2 = new javax.swing.JLabel();
         ganadorTorneo = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JButton();
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -64,7 +67,7 @@ public class Sesion extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setText("Bienvenid@ a tu sesión");
@@ -145,17 +148,17 @@ public class Sesion extends javax.swing.JFrame {
 
         jInternalFrame2.setVisible(true);
 
-        Torneo.setText("jLabel2");
+        Torneo.setText("---");
 
-        carrera1.setText("Carrera 1");
+        carrera1.setText("---");
 
-        carrera3.setText("jLabel2");
+        carrera3.setText("---");
 
-        carrera4.setText("jLabel2");
+        carrera4.setText("---");
 
-        carrera2.setText("jLabel2");
+        carrera2.setText("---");
 
-        ganadorTorneo.setText("jLabel2");
+        ganadorTorneo.setText("---");
 
         javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
         jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
@@ -190,6 +193,13 @@ public class Sesion extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
+        btnCerrar.setText("Cerrar sesión");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -199,12 +209,18 @@ public class Sesion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
-                                .addComponent(btnApostar))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
-                                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(btnApostar))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(28, 28, 28)
+                                        .addComponent(btnCerrar)))
+                                .addGap(85, 85, 85)))
                         .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(269, 269, 269)
@@ -225,8 +241,10 @@ public class Sesion extends javax.swing.JFrame {
                     .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(btnApostar)))
+                        .addGap(48, 48, 48)
+                        .addComponent(btnApostar)
+                        .addGap(39, 39, 39)
+                        .addComponent(btnCerrar)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -238,8 +256,7 @@ public class Sesion extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnApostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApostarActionPerformed
-        
-        
+
         //Ponemos valores del jugador en 0
         jugador.numJugadorApostado=0;
         jugador.cantidadApostada=0;
@@ -256,25 +273,18 @@ public class Sesion extends javax.swing.JFrame {
         ObservadorResultadoTorneo obt=new ObservadorResultadoTorneo(jugador);
         ControlVentSeguir controlSeguir=new ControlVentSeguir(hilo2);
 
-        //Observable
-        //Cronometro cronometro=new Cronometro(20000);
-
-        //Hacemos observadores en hilo 1 e hilo 2
-        //cronometro.addObserver(hilo1);//para saber cuando cerrar la ventana de apuesta del torneo
-        //cronometro.addObserver(hilo2);//para saber cuando iniciar el torneo
+        //Hacemos observadores 
         hilo2.addObserver(observadorHilo2);
         hilo2.addObserver(observadorResultadoC);
         hilo2.addObserver(obt);
         hilo2.addObserver(controlSeguir);
         hilo2.addObserver(apTorneo);
 
-        //hilo1.start();
-        //hilo2.start();
-        //cronometro.start();
         hilo2.start();
         
     }//GEN-LAST:event_btnApostarActionPerformed
-
+     //FIN DE BTNAPOSTARACTIONPERFORMED
+    
     /**
      * Metodo de acciones del boton Movimientos de la Cuenta
      * @param evt 
@@ -284,7 +294,8 @@ public class Sesion extends javax.swing.JFrame {
         MovimientosCuenta mov=new MovimientosCuenta(jugador);
         mov.setVisible(true);
     }//GEN-LAST:event_btnMovimientosActionPerformed
-
+     //FIN DE BTNMOVIMIENTOSACTIONPERFORMED
+    
     /**
      * Metodo de acciones del boton Saldo
      * @param evt 
@@ -294,7 +305,8 @@ public class Sesion extends javax.swing.JFrame {
         DecimalFormat df =  new DecimalFormat("#.##");
         JOptionPane.showMessageDialog(null,"Tu saldo actual es de "+df.format(cuenta.consultarSaldo()));
     }//GEN-LAST:event_btnSaldoActionPerformed
-
+     //FIN DE BTNSALDOACTIONPERFORMED
+    
     /**
      * Metodo de acciones del boton Depositar/ Retirar
      * @param evt 
@@ -304,7 +316,8 @@ public class Sesion extends javax.swing.JFrame {
         DepositarRetirar a=new DepositarRetirar(jugador);
         a.setVisible(true);
     }//GEN-LAST:event_btnDepRetActionPerformed
-
+     //FIN DE BTNDEPRETACTIONPERFORMED
+    
     /**
      * Metodo del boton Historial de ganadas/perdidas
      * @param evt 
@@ -314,17 +327,20 @@ public class Sesion extends javax.swing.JFrame {
         GanadasPerdidas hist=new GanadasPerdidas(jugador);
         hist.setVisible(true);
     }//GEN-LAST:event_btnGanadasPerdidasActionPerformed
-
+     //FIN DE BTNGANADASPERDIDASACTIONPERFORMED
+    
+    //Metodo del boton para salir de la sesion
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        login.setVisible(true);//hacemos visible la ventana de login que abrio esta ventana
+        this.dispose();//cerramos esta ventana
+    }//GEN-LAST:event_btnCerrarActionPerformed
+     //FIN DE BTNCERRARACTIONPERFORMED
+    
     /**
      * Metodo principal
      * @param args 
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -346,15 +362,16 @@ public class Sesion extends javax.swing.JFrame {
         // Crear y mostrar ventana
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Sesion(jugador, juego).setVisible(true);
+                new Sesion(jugador, juego,login).setVisible(true);
             }
         });
-    }
+    }//FIN DEL MAIN
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel Torneo;
     private javax.swing.JButton btnApostar;
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnDepRet;
     private javax.swing.JButton btnGanadasPerdidas;
     private javax.swing.JButton btnMovimientos;

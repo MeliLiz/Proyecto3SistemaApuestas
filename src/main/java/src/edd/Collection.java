@@ -1,6 +1,7 @@
 
 package src.edd;
 
+
 public interface Collection<T> extends Iterable<T>{
 
     /**

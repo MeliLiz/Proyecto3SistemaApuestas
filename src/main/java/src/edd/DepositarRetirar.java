@@ -8,8 +8,9 @@ import java.text.DecimalFormat;
  * @see Cuenta
  */
 public class DepositarRetirar extends javax.swing.JFrame {
-    static Jugador jugador;
-    static Cuenta cuenta;
+    static Jugador jugador;//el jugador con el que estamos trabajando
+    static Cuenta cuenta;//el juego con el que estamos trabajando
+    
     /**
      * Constructor
      */
@@ -19,7 +20,7 @@ public class DepositarRetirar extends javax.swing.JFrame {
         this.cuenta=jugador.cuenta;
         DecimalFormat df =  new DecimalFormat("#.##");
         Saldo.setText("$ "+String.valueOf(df.format(cuenta.consultarSaldo())));
-    }
+    }//FIN DEL CONSTRUCTOR
 
     /**
      * Inicializar ventana
@@ -38,6 +39,7 @@ public class DepositarRetirar extends javax.swing.JFrame {
         Saldo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 191, 155));
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setText("Depositar / Retirar");
@@ -58,7 +60,7 @@ public class DepositarRetirar extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Saldo actual: ");
+        jLabel3.setText("Saldo actual:");
 
         Saldo.setText("jLabel4");
 
@@ -67,26 +69,28 @@ public class DepositarRetirar extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(OpcionSel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(44, 44, 44)
-                        .addComponent(Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(51, 51, 51)
-                                .addComponent(Saldo)))))
+                                .addGap(98, 98, 98)
+                                .addComponent(OpcionSel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(44, 44, 44)
+                                .addComponent(Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Saldo))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(jButton1)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,9 +108,9 @@ public class DepositarRetirar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,7 +123,8 @@ public class DepositarRetirar extends javax.swing.JFrame {
     private void OpcionSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpcionSelActionPerformed
         //No hacemos nada
     }//GEN-LAST:event_OpcionSelActionPerformed
-
+     //FIN DE OPCIONSELACTIONPERFORMED
+    
     /**
      * Metodo de acciones del boton Aceptar
      * @param evt 
@@ -149,7 +154,8 @@ public class DepositarRetirar extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
+     //FIN DE JBUTTONACTIONPERFORMED
+    
     /**
      * Metodo principal
      * @param args
@@ -184,7 +190,7 @@ public class DepositarRetirar extends javax.swing.JFrame {
                 new DepositarRetirar(jugador).setVisible(true);
             }
         });
-    }
+    }//FIN DEL MAIN
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Cantidad;

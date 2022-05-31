@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Lista<T> implements Collection<T>, Serializable {
 
     // Clase Nodo
-    private class Nodo {
+    private class Nodo implements Serializable{
         public T elemento;
         public Nodo anterior;
         public Nodo siguiente;
@@ -29,7 +29,7 @@ public class Lista<T> implements Collection<T>, Serializable {
     }//FIN DE CLASE NODO
 
     // Iterador
-    private class Iterador implements IteradorLista<T> {
+    private class Iterador implements IteradorLista<T>, Serializable {
         public Nodo anterior;
         public Nodo siguiente;
 

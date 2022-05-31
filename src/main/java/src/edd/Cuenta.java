@@ -5,14 +5,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.Serializable;
 
+/**
+ * Clase que simula una cuenta de dinero
+ * @author meli
+ */
 public class Cuenta implements Serializable{
     private double saldoDisponible;//Saldo disponible
     Lista<String[]> movimientos;//Historial de movimientos
-    int numeroDeApuesta;//Num de apuesta jugada
     Lista<String[]> apuestasGanadas;//Apuestas que se han ganado
     Lista<String[]> apuestasPerdidas;//Apuestas que se han perdido
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-
 
     /**
      * Constructor de una cuenta
@@ -20,11 +21,11 @@ public class Cuenta implements Serializable{
     public Cuenta(){
         saldoDisponible=0;//Saldo inicial 0
         movimientos=new Lista<>();//creamos lista de historial
+         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         String[] arr={"Creacion de cuenta","-", dtf.format(LocalDateTime.now())};//registramos el movimiento en el historial
         movimientos.add(arr);//agregamos la creacion de la cuenta al historial
         apuestasGanadas=new Lista<>();//Creamos la lista de apuestas ganadas
         apuestasPerdidas=new Lista<>();//Creamos la lista de apuestas perdidas
-        numeroDeApuesta=0;//Aun no se han hecho apuestas
     }//FIN DE CONSTRUCTOR 1
 
     /**
@@ -37,6 +38,7 @@ public class Cuenta implements Serializable{
             return false;
         }else{
             saldoDisponible+=n;
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             String[] arr={"Deposito",""+n, dtf.format(LocalDateTime.now())};
             movimientos.add(arr);//registramos el movimiento en el historial
             return true;
@@ -53,6 +55,7 @@ public class Cuenta implements Serializable{
             return false;
         }else{
             saldoDisponible-=n;
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             String[] arr={"Retiro",""+n, dtf.format(LocalDateTime.now())};
             movimientos.add(arr);//registramos el movimiento en el historial
             return true;
@@ -69,6 +72,7 @@ public class Cuenta implements Serializable{
             return false;
         }else{
             saldoDisponible-=n;
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             String[] arr={"Apuesta",""+n, dtf.format(LocalDateTime.now())};
             movimientos.add(arr);//registramos el movimiento en el historial
             return true;
@@ -90,6 +94,7 @@ public class Cuenta implements Serializable{
      */
     public void agregarGanada(double ganado, double apostado){
         depositar(ganado);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         String[] arr={""+apostado,""+ganado, dtf.format(LocalDateTime.now())};//registramos el movimiento en el historial
         apuestasGanadas.add(arr);
     }// FIN DE AGREGAR GANADA
@@ -99,6 +104,7 @@ public class Cuenta implements Serializable{
      * @param perdido
      */
     public void agregarPerdida(double perdido){
+         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         String[] arr={""+perdido, dtf.format(LocalDateTime.now())};//registramos el movimiento en el historial
         apuestasPerdidas.add(arr);
     }//FIN DE AGREGAR PERDIDA

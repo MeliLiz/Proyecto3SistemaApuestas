@@ -5,13 +5,18 @@ import java.util.Observable;
 
 /**
  *Clase para abrir la ventana para apostar en la carrera en el momento correcto
+ * @author meli
  */
 public class ObservadorCarrera implements Observer {
-    static Jugador jugador;
+    static Jugador jugador;//El jugador con el que estamos trabajando
     
+    /**
+     * Constructor
+     * @param jugador 
+     */
     public ObservadorCarrera(Jugador jugador){
         this.jugador=jugador;
-    }
+    }//FIN DE CONSTRUCTOR
     
     
     //Debe recibir la lista de competidores
@@ -24,14 +29,14 @@ public class ObservadorCarrera implements Observer {
             
                 Lista<Candidato> competidores=(Lista<Candidato>)lista;
                 HiloVentanaCarreras hilo1=new HiloVentanaCarreras(jugador, competidores);
+                Segundero segundero=new Segundero();
                 Cronometro cronometro=new Cronometro(20000);
                 cronometro.addObserver(hilo1);
+                segundero.addObserver(hilo1);
                 hilo1.start();
+                segundero.start();
                 cronometro.start();
             }
-        }
-        
-        
-        
-    }
+        }  
+    }//FIN DE UPDATE
 }
