@@ -16,8 +16,9 @@ public class HiloInicio extends Observable implements Runnable,Observer{
     Thread hilo;//Este hilo
     boolean seguir;//Para saber si seguir los torneos o no
     Sesion padre; //La ventana sesion que llama a este hilo
-    DefaultTableModel[] modelos;
-    javax.swing.JTable[] tablas;
+    DefaultTableModel[] modelos;//arreglo de los modelos para las tablas de la ventana sesion
+    javax.swing.JTable[] tablas;//arreglo de las tablas de la ventana de la ventana sesion
+    javax.swing.JLabel[] tiempos;//arreglo de las etiquetas de tiempo de la ventana sesion
     
     /**
      * Constructor
@@ -26,15 +27,22 @@ public class HiloInicio extends Observable implements Runnable,Observer{
      * @param sesion La ventana sesion que llama a este hilo
      */
     public HiloInicio(Juego juego, Jugador jugador, Sesion sesion){
-        this.juego=juego;
-        hilo=new Thread(this);
-        this.jugador=jugador;
-        seguir=true;
-        padre=sesion;
-        tablas=new javax.swing.JTable[8];
+        this.juego=juego;//El juego con el que estamos trabajando
+        hilo=new Thread(this);//Este hilo
+        this.jugador=jugador;//El jugador con el que estamos trabajando
+        seguir=true;//para seguir con los torneos
+        padre=sesion;//la sesion que llamo a este hilo
+        tablas=new javax.swing.JTable[8];//el arreglo de tablas de la ventana sesion para modificarlas
+        tiempos=new javax.swing.JLabel[9];//el arreglo de etiqutas de tiempo de la ventana sesion para modificarlas
+        //Obtenemos todas las etiquetas de tiempo
+        for(int i=0;i<9;i++){
+            tiempos[i]=padre.getTiempo(i+1);
+        }
+        //Obtenemos todas las tablas
         for(int i=0;i<8;i++){
             tablas[i]=padre.getTabla(i+1);
         }
+        //Creamos el arreglo de modelos de las tablas
         modelos=new DefaultTableModel[8];
         hacerModelos();
     }//FIN DE CONSTRUCTOR
@@ -48,8 +56,12 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             jugador.cantidadApostada=0;
             jugador.cuotaAp=0;
             
+            //Quitamos los valores anteriores de las etiquetas de tiempo
+            for(int i=0;i<9;i++){
+                tiempos[i].setText("");
+            }
             
-            
+            //quitamos los valores anteriores de las tablas
             for(int i=0;i<8;i++){
                 if (tablas[i].getColumnCount()>0) {
                     modelos[i].setColumnCount(0);
@@ -82,11 +94,15 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             this.notifyObservers(new Cola<Integer>());
             
             //Dormimos el hilo 20 segundos en lo que el usuario hace su apuesta
-            try{
-                Thread.sleep(20000);//Tiempo para apostar por el torneo
-            }catch(InterruptedException e){
-                System.out.println("Fallo al dormir el hilo");
+            for(int i=20;i>0;i--){
+                try{
+                    Thread.sleep(1000);//Tiempo para apostar por el torneo
+                    tiempos[0].setText(""+(i-1));
+                }catch(InterruptedException e){
+                    System.out.println("Fallo al dormir el hilo");
+                }
             }
+            tiempos[0].setText("0");
             
             //Ponemos en la ventana de sesion que el torneo comienza
             padre.getTorneo(1).setText("Inicio del torneo");
@@ -105,11 +121,16 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             this.notifyObservers(competidores1);
 
             //Dormimos el hilo en lo que el usuario hace su apuesta
-            try{
-                Thread.sleep(20000);//Tiempo para apostar por la primera carrera
-            }catch(InterruptedException e){
-                System.out.println("Fallo al dormir el hilo");
+            for(int i=20;i>0;i--){
+                try{
+                    Thread.sleep(1000);//Tiempo para apostar por la primera carrera
+                    tiempos[1].setText(""+(i-1));
+                }catch(InterruptedException e){
+                    System.out.println("Fallo al dormir el hilo");
+                }
             }
+            tiempos[1].setText("0");
+            
 
             //Ponemos en la ventana sesion que la carrera esta en progreso
             padre.getCarrera(1).setText("Carrera 1 en progreso");
@@ -124,11 +145,15 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             int ganador1=pasantes1.peekCabeza().num;//obtenemos al ganador de la carrera
             
             //Esperamos el tiempo que debe durar la carrera
-            try{
-                Thread.sleep(10000);//esperamos a que se termine el tiempo de corrida
-            }catch(InterruptedException e){
-                System.out.println("Fallo al dormir el hilo 2");
+            for(int i=10;i>0;i--){
+                try{
+                    Thread.sleep(1000);
+                    tiempos[2].setText(""+(i-1));
+                }catch(InterruptedException e){
+                    System.out.println("Fallo al dormir el hilo");
+                }
             }
+            tiempos[2].setText("0");
             
             //Ponemos el la ventana de sesion que la carrera 1 finalizo
             padre.getCarrera(1).setText("Carrera 1 finalizada");
@@ -154,11 +179,15 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             this.notifyObservers(candidatos);//los candidatos que competiran son los que no compitieron en la carrera anterior
 
             //Dormimos el hilo en lo que el usuario hace su apuesta
-            try{
-                Thread.sleep(20000);//esperamos el tiempo para apostar por la segunda carrera
-            }catch(InterruptedException e){
-                System.out.println("Fallo al dormir el hilo 4");
+            for(int i=20;i>0;i--){
+                try{
+                    Thread.sleep(1000);//Tiempo para apostar por la primera carrera
+                    tiempos[3].setText(""+(i-1));
+                }catch(InterruptedException e){
+                    System.out.println("Fallo al dormir el hilo");
+                }
             }
+            tiempos[3].setText("0");
             
             //Ponemos en la ventana de sesion que la carrera 2 comenzo
             padre.getCarrera(2).setText("Carrera 2 en progreso");
@@ -174,11 +203,15 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             int ganador2=pasantes2.peekCabeza().num;//obtenemos al ganador
 
             //Esperamos el tiempo que debe durar la carrera
-            try{
-                Thread.sleep(10000);//esperamos a que se termine el tiempo de corrida
-            }catch(InterruptedException e){
-                System.out.println("Fallo al dormir el hilo 5");
+            for(int i=10;i>0;i--){
+                try{
+                    Thread.sleep(1000);//Tiempo para apostar por la primera carrera
+                    tiempos[4].setText(""+(i-1));
+                }catch(InterruptedException e){
+                    System.out.println("Fallo al dormir el hilo");
+                }
             }
+            tiempos[4].setText("0");
 
             //Notificamos a los observadores de mensajes para que avisen quien gana y si la apuesta del usuario fue acertada
             this.setChanged();
@@ -209,11 +242,15 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             this.notifyObservers(competidores1);
             
             //Dormimos el hilo en lo que el jugador apuesta
-            try{
-                Thread.sleep(20000);//esperamos el tiempo para apostar por la tercera carrera
-            }catch(InterruptedException e){
-                System.out.println("Fallo al dormir el hilo 4");
+            for(int i=20;i>0;i--){
+                try{
+                    Thread.sleep(1000);//Tiempo para apostar por la primera carrera
+                    tiempos[5].setText(""+(i-1));
+                }catch(InterruptedException e){
+                    System.out.println("Fallo al dormir el hilo");
+                }
             }
+            tiempos[5].setText("0");
             
             //ponemos en la ventana de sesion que la carrera 3 comienza
             padre.getCarrera(3).setText("Carrera 3 en progreso");
@@ -231,11 +268,15 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             }
             
             //Esperamos el tiempo que debe durar la carrera
-            try{
-                Thread.sleep(10000);//esperamos a que se termine el tiempo de corrida
-            }catch(InterruptedException e){
-                System.out.println("Fallo al dormir el hilo 5");
+            for(int i=10;i>0;i--){
+                try{
+                    Thread.sleep(1000);//Tiempo para apostar por la primera carrera
+                    tiempos[6].setText(""+(i-1));
+                }catch(InterruptedException e){
+                    System.out.println("Fallo al dormir el hilo");
+                }
             }
+            tiempos[6].setText("0");
 
             //Notificamos a los observadores de mensajes del ganador
             this.setChanged();
@@ -264,11 +305,15 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             this.notifyObservers(pasantes1);
 
             //dormimos el hilo en lo que el usuario apuesta
-            try{
-                Thread.sleep(20000);//esperamos el tiempo para apostar por la tercera carrera
-            }catch(InterruptedException e){
-                System.out.println("Fallo al dormir el hilo 7");
+            for(int i=20;i>0;i--){
+                try{
+                    Thread.sleep(1000);//Tiempo para apostar por la primera carrera
+                    tiempos[7].setText(""+(i-1));
+                }catch(InterruptedException e){
+                    System.out.println("Fallo al dormir el hilo");
+                }
             }
+            tiempos[7].setText("0");
 
             //Ponemos en la ventana de sesion que la carrera 4 comenzo
             padre.getCarrera(4).setText("Carrera 4 en progreso");
@@ -286,11 +331,15 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             }
 
             //Esperamos el tiempo que debe durar la carrera
-            try{
-                Thread.sleep(10000);//esperamos a que se termine el tiempo de corrida
-            }catch(InterruptedException e){
-                System.out.println("Fallo al dormir el hilo 8");
+            for(int i=10;i>0;i--){
+                try{
+                    Thread.sleep(1000);//Tiempo para apostar por la primera carrera
+                    tiempos[8].setText(""+(i-1));
+                }catch(InterruptedException e){
+                    System.out.println("Fallo al dormir el hilo");
+                }
             }
+            tiempos[8].setText("0");
             
             //Notificamos a los observadores de mensajes del ganandor
             this.setChanged();
@@ -342,27 +391,29 @@ public class HiloInicio extends Observable implements Runnable,Observer{
         }
     }//FIN DE RUN
     
+    //Metodo para llenar el arreglo de modelos de las tablas
     private void hacerModelos(){
         for(int i=0;i<8;i++){
             DefaultTableModel modelo =new DefaultTableModel();
             modelos[i]=modelo;
         }
-    }
+    }//FIN DE HACERMODELOS
     
-    
-    
+    //Metodo para poner el encabezado de las tablas de competidores
     private void setModelo(javax.swing.JTable tabla, int n){
         String[] cabecera={"Jugadores compitiendo"};
         modelos[n-1].setColumnIdentifiers(cabecera);
         tabla.setModel(modelos[n-1]);
-    }
+    }//FIN DE SETMODELO
     
+    //Metodo para poner el encabezado de las otras tabals
     private void setModelo2(javax.swing.JTable tabla, int n){
         String[] cabecera={"Primeros lugares"};
         modelos[n-1].setColumnIdentifiers(cabecera);
         tabla.setModel(modelos[n-1]);
-    }
+    }//FIN DE SETMODELO2
     
+    //Metodo para poner los datos en las tablas
     private void setDatos(Lista<Candidato> competidores, javax.swing.JTable tabla, int n){
         Iterator<Candidato> it=competidores.iterator();
         for(int i=0;i<competidores.size();i++){
@@ -371,7 +422,7 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             modelos[n-1].addRow(arr);
             tabla.setModel(modelos[n-1]);
         }
-    }
+    }//FIN DE SETDATOS
     
     //En el momento en que reciba la señal del cronometro, empezara su ejecucion
     @Override public void update(Observable o, Object args){
@@ -399,7 +450,6 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             regreso.add(g);
             competidores.delete(g);
         }
-        
         //System.out.println(competidores);
         return regreso;
     }//FIN DE PASANTES
