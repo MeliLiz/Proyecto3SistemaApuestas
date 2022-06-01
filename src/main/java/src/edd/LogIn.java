@@ -19,6 +19,7 @@ public class LogIn extends javax.swing.JFrame {
         initComponents();
         this.juego=juego;
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

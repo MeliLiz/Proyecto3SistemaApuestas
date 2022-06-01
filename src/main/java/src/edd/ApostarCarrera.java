@@ -29,6 +29,7 @@ public class ApostarCarrera extends javax.swing.JFrame {
         for(int i=0;i<competidores.size();i++){
             opcion.addItem(""+(i+1));
         }
+        this.setResizable(false);
     }
     
     //Para modificar ls tabla
@@ -139,7 +140,7 @@ public class ApostarCarrera extends javax.swing.JFrame {
 
         jLabel6.setText("La carrera comenzará en");
 
-        segundos.setText("n");
+        segundos.setText("20");
 
         Saldo2.setText("segundos");
 

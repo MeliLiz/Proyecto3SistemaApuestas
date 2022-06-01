@@ -28,6 +28,7 @@ public class MovimientosCuenta extends javax.swing.JFrame {
         this.mov=cuenta.movimientos;
         setModelo();
         setDatos();
+        this.setResizable(false);
     }//FIN DE MOVIMIENTOSCUENTA
     
     //Metodo para poner la cabecera de la tabla

@@ -20,6 +20,7 @@ public class DepositarRetirar extends javax.swing.JFrame {
         this.cuenta=jugador.cuenta;
         DecimalFormat df =  new DecimalFormat("#.##");
         Saldo.setText("$ "+String.valueOf(df.format(cuenta.consultarSaldo())));
+        this.setResizable(false);
     }//FIN DEL CONSTRUCTOR
 
     /**

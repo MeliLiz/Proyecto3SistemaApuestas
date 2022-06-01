@@ -29,6 +29,7 @@ public class ApostarTorneo extends javax.swing.JFrame {
         setDatos();
         DecimalFormat df =  new DecimalFormat("#.##");
         Saldo.setText(""+df.format(jugador.cuenta.consultarSaldo()));
+        this.setResizable(false);
     }
     
     //Para cambiar el diseño de la tabla
@@ -133,7 +134,7 @@ public class ApostarTorneo extends javax.swing.JFrame {
 
         jLabel6.setText("segundos");
 
-        segundos.setText("n");
+        segundos.setText("20");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

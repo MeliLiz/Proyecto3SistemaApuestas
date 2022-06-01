@@ -1,0 +1,40 @@
+                              ******* Sistema de apuestas *******
+
+Bienvenid@ al sistema de apuestas de torneos y carreras.
+Para ingresar al sistema debes registrarte (si no lo has hecho) e ingresar 
+con tu nombre de usuario y contraseña. Al ingresar tendrás una ventana con 
+tu sesión y los ajustes de tu cuenta, donde podrás consultar tu saldo, el 
+historial de movimientos de tu cuenta, así como el historial de ganadas y 
+perdidas  en torneos y carreras. También puedes depositar y retirar "dinero" 
+de tu cuenta.
+Tienes a tu disposición un botón con el cual puedes ingresar al siguiente 
+torneo, en el cual tendrás 20 segundos para apostar por alguno de los 
+candidatos disponibles. 
+Cada torneo está compuesto de 4 carreras, en las que de igual manera tendrás
+20 segundos para apostar por el candidato de tu preferencia.
+En la primera y segunda carrera se determinan los seis concursantes (tres en
+cada carrera) que quedarán en los primeros 6 lugares del torneo. En la tercera
+carrera se determina el lugar de los participantes de las carreras anteriores
+que no quedaron en los primeros 3 lugares de su respectiva carrera. Finalmente 
+en la cuarta carrera compiten los participantes de los primeros 6 lugares para
+determinar su lugar correspondiente y obtener al ganador del torneo. Cada una
+de estas carreras tiene una duración de 10 segundos.
+Al momento de apostar tienes disponible la cuota decimal por apostar por cada 
+competidor de la carrera (o torneo) basado en su probabilidad de ganar. 
+También tienes a tu disposición su historial de posiciones de los últimos 
+5 torneos en los que participó.
+Recuerda que para el torneo como para las carreras tienes 20 segundos para
+apostar. Después de ese tiempo la ventana para apostar se cerrará 
+automáticamente. 
+IMPORTANTE
+Si no puedes apostar en una carrera o torneo, no te preocupes, tendrás más 
+oportunidades de apostar.
+Si al apostar te quedas sin "dinero", siempre puedes hacer un depósito a tu
+cuenta.
+Si estás dentro de un torneo UNICAMENTE podrás salir de él cuando éste se
+termina y te aparece la ventana para decidir si quieres salir. 
+Tienes 6 segundos para decidir si quieres seguir en el siguiente torneo o no.
+Para salir de tu sesión es necesario elegir la opción "cerrar sesión y 
+posteriormente dar clic en Salir.
+Por favor usa correctamente este programa.
+###### Esto solo es un simulador, no usa dinero real #########

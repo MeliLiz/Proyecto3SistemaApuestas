@@ -3,6 +3,8 @@ package src.edd;
 import java.util.Iterator;
 import java.util.Observer;
 import java.util.Observable;
+import javax.swing.table.DefaultTableModel;
+import java.util.Random;
 
 /**
  * hilo para iniciar los torneos
@@ -14,6 +16,8 @@ public class HiloInicio extends Observable implements Runnable,Observer{
     Thread hilo;//Este hilo
     boolean seguir;//Para saber si seguir los torneos o no
     Sesion padre; //La ventana sesion que llama a este hilo
+    DefaultTableModel[] modelos;
+    javax.swing.JTable[] tablas;
     
     /**
      * Constructor
@@ -27,6 +31,12 @@ public class HiloInicio extends Observable implements Runnable,Observer{
         this.jugador=jugador;
         seguir=true;
         padre=sesion;
+        tablas=new javax.swing.JTable[8];
+        for(int i=0;i<8;i++){
+            tablas[i]=padre.getTabla(i+1);
+        }
+        modelos=new DefaultTableModel[8];
+        hacerModelos();
     }//FIN DE CONSTRUCTOR
     
     @Override public void run(){
@@ -37,6 +47,15 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             jugador.numJugadorApostado=0;
             jugador.cantidadApostada=0;
             jugador.cuotaAp=0;
+            
+            
+            
+            for(int i=0;i<8;i++){
+                if (tablas[i].getColumnCount()>0) {
+                    modelos[i].setColumnCount(0);
+                    modelos[i].setRowCount(0);
+                }
+            }
             
             Iterator it=juego.candidatos.iterator();
             for(int i=0;i<16;i++){
@@ -94,13 +113,19 @@ public class HiloInicio extends Observable implements Runnable,Observer{
 
             //Ponemos en la ventana sesion que la carrera esta en progreso
             padre.getCarrera(1).setText("Carrera 1 en progreso");
+            
+            setModelo(padre.getTabla(1),1);
+            setDatos(competidores1,tablas[0],1);
+            
+            
+            
             //Tomamos los competidores que ganan
             Lista<Candidato> pasantes1=pasantes(competidores1,3);
             int ganador1=pasantes1.peekCabeza().num;//obtenemos al ganador de la carrera
             
             //Esperamos el tiempo que debe durar la carrera
             try{
-                Thread.sleep(20000);//esperamos a que se termine el tiempo de corrida
+                Thread.sleep(10000);//esperamos a que se termine el tiempo de corrida
             }catch(InterruptedException e){
                 System.out.println("Fallo al dormir el hilo 2");
             }
@@ -111,6 +136,9 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             //Notificamos a los observadores de mensajes de ganadores
             this.setChanged();
             this.notifyObservers(ganador1);
+            
+            setModelo2(padre.getTabla(2),2);
+            setDatos(pasantes1,tablas[1],2);
         
             //damos tiempo para la notificacion del ganador
             try{
@@ -134,6 +162,12 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             
             //Ponemos en la ventana de sesion que la carrera 2 comenzo
             padre.getCarrera(2).setText("Carrera 2 en progreso");
+            
+            
+            setModelo(padre.getTabla(3),3);
+            setDatos(candidatos,tablas[2],3);
+            
+            
 
             //Tomamos a los que ganaron la carrera
             Lista<Candidato> pasantes2=pasantes(candidatos,3);
@@ -141,7 +175,7 @@ public class HiloInicio extends Observable implements Runnable,Observer{
 
             //Esperamos el tiempo que debe durar la carrera
             try{
-                Thread.sleep(20000);//esperamos a que se termine el tiempo de corrida
+                Thread.sleep(10000);//esperamos a que se termine el tiempo de corrida
             }catch(InterruptedException e){
                 System.out.println("Fallo al dormir el hilo 5");
             }
@@ -149,6 +183,10 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             //Notificamos a los observadores de mensajes para que avisen quien gana y si la apuesta del usuario fue acertada
             this.setChanged();
             this.notifyObservers(ganador2);
+            
+            
+            setModelo2(padre.getTabla(4),4);
+            setDatos(pasantes2,tablas[3],4);
             
             //Ponemos en la ventana de sesion que la carrera 2 finalizo
             padre.getCarrera(2).setText("Carrera 2 finalizada");
@@ -164,7 +202,7 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             
             //Carrera de los que no pasaron a la carrera final para asignarles su lugar
             competidores1.append(candidatos);
-            System.out.println(competidores1);
+            //System.out.println(competidores1);
          
             //notificamos a los observadores que abren la ventana para apostar en la carrera
             this.setChanged();
@@ -179,6 +217,9 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             
             //ponemos en la ventana de sesion que la carrera 3 comienza
             padre.getCarrera(3).setText("Carrera 3 en progreso");
+            
+            setModelo(padre.getTabla(5),5);
+            setDatos(competidores1,tablas[4],5);
 
             //Tomamos los competidores en el orden
             Lista<Candidato> l=pasantes(competidores1,10);
@@ -191,7 +232,7 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             
             //Esperamos el tiempo que debe durar la carrera
             try{
-                Thread.sleep(20000);//esperamos a que se termine el tiempo de corrida
+                Thread.sleep(10000);//esperamos a que se termine el tiempo de corrida
             }catch(InterruptedException e){
                 System.out.println("Fallo al dormir el hilo 5");
             }
@@ -199,6 +240,9 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             //Notificamos a los observadores de mensajes del ganador
             this.setChanged();
             this.notifyObservers(sexto.num);
+            
+            setModelo2(padre.getTabla(6),6);
+            setDatos(l,tablas[5],6);
             
             //Ponemos en la ventana de sesion que la carrera 3 finalizo
             padre.getCarrera(3).setText("Carrera 3 finalizada");
@@ -228,6 +272,9 @@ public class HiloInicio extends Observable implements Runnable,Observer{
 
             //Ponemos en la ventana de sesion que la carrera 4 comenzo
             padre.getCarrera(4).setText("Carrera 4 en progreso");
+            
+            setModelo(padre.getTabla(7),7);
+            setDatos(pasantes1,tablas[6],7);
 
             //Tomamos los el lugar de cada candidato en la competencia
             Lista<Candidato> ganadores=pasantes(pasantes1,6);
@@ -240,7 +287,7 @@ public class HiloInicio extends Observable implements Runnable,Observer{
 
             //Esperamos el tiempo que debe durar la carrera
             try{
-                Thread.sleep(20000);//esperamos a que se termine el tiempo de corrida
+                Thread.sleep(10000);//esperamos a que se termine el tiempo de corrida
             }catch(InterruptedException e){
                 System.out.println("Fallo al dormir el hilo 8");
             }
@@ -248,6 +295,9 @@ public class HiloInicio extends Observable implements Runnable,Observer{
             //Notificamos a los observadores de mensajes del ganandor
             this.setChanged();
             this.notifyObservers(ganador);
+            
+            setModelo2(padre.getTabla(8),8);
+            setDatos(ganadores,tablas[7],8);
             
             //Ponemos en la ventana de sesion que la carrera 4 finalizo
             padre.getCarrera(4).setText("Carrera 4 finalizada");
@@ -292,6 +342,37 @@ public class HiloInicio extends Observable implements Runnable,Observer{
         }
     }//FIN DE RUN
     
+    private void hacerModelos(){
+        for(int i=0;i<8;i++){
+            DefaultTableModel modelo =new DefaultTableModel();
+            modelos[i]=modelo;
+        }
+    }
+    
+    
+    
+    private void setModelo(javax.swing.JTable tabla, int n){
+        String[] cabecera={"Jugadores compitiendo"};
+        modelos[n-1].setColumnIdentifiers(cabecera);
+        tabla.setModel(modelos[n-1]);
+    }
+    
+    private void setModelo2(javax.swing.JTable tabla, int n){
+        String[] cabecera={"Primeros lugares"};
+        modelos[n-1].setColumnIdentifiers(cabecera);
+        tabla.setModel(modelos[n-1]);
+    }
+    
+    private void setDatos(Lista<Candidato> competidores, javax.swing.JTable tabla, int n){
+        Iterator<Candidato> it=competidores.iterator();
+        for(int i=0;i<competidores.size();i++){
+            Integer[] arr=new Integer[1];
+            arr[0]=it.next().num;
+            modelos[n-1].addRow(arr);
+            tabla.setModel(modelos[n-1]);
+        }
+    }
+    
     //En el momento en que reciba la señal del cronometro, empezara su ejecucion
     @Override public void update(Observable o, Object args){
         hilo.start();
@@ -309,16 +390,17 @@ public class HiloInicio extends Observable implements Runnable,Observer{
     //n el numero de primeros lugares que queremos
     private Lista<Candidato> pasantes(Lista<Candidato> competidores, int n){
         Lista<Candidato> regreso=new Lista<>();
-        System.out.println("Tamaño: "+competidores.size());
+        //System.out.println("Tamaño: "+competidores.size());
         for(int i=0;i<n;i++){
-            System.out.println("i="+i);
+            //System.out.println("i="+i);
             //Hacemos el dado con base en la probabilidad de ganar de cada jugador
             Lista<Candidato> dado=Dado(competidores);
             Candidato g=escogerGanador(dado);
             regreso.add(g);
             competidores.delete(g);
         }
-        System.out.println(competidores);
+        
+        //System.out.println(competidores);
         return regreso;
     }//FIN DE PASANTES
     
@@ -326,8 +408,12 @@ public class HiloInicio extends Observable implements Runnable,Observer{
     private Candidato escogerGanador(Lista<Candidato> dado){
         //lanzamos el dado
         dado.shuffle();
+        //System.out.println(dado);
         //escogemos al ganador
-        Candidato ganador=dado.pop();
+        Random random=new Random();
+        int n=random.nextInt(dado.size()-1);
+        Candidato ganador=dado.elementoEnPos(n);
+        //System.out.println("Ganador"+ganador);
         return ganador;
     }//FIN DE ESCOGERGANADOR
     
@@ -358,6 +444,8 @@ public class HiloInicio extends Observable implements Runnable,Observer{
                 dado.add(actual);
             }
         }
+        dado.shuffle();
+        //System.out.println(dado);
         return dado;
     }// FIN DE DADO
 }

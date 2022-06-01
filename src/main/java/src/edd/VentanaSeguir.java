@@ -16,6 +16,7 @@ public class VentanaSeguir extends javax.swing.JFrame{
         initComponents();
         this.h=h;
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }//FIN DE CONSTRUCTOR
 
     /**

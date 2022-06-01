@@ -19,6 +19,7 @@ public class Ingresar extends javax.swing.JFrame {
         this.juego=juego;
         this.setLocationRelativeTo(null);
         ventanaPadre=l;
+        this.setResizable(false);
     }//FIN DE CONSTRUCTOR
 
     /**

@@ -25,6 +25,7 @@ public class GanadasPerdidas extends javax.swing.JFrame {
         setModeloPerdidas();
         setDatosGanadas();
         setDatosPerdidas();
+        this.setResizable(false);
     }//FIN DEL CONSTRUCTOR
     
     //Para cambiar el diseño de la tabla de ganadas y de perdidas

@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package src.edd;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 /**
  *
@@ -15,6 +15,28 @@ public class Instrucciones extends javax.swing.JFrame {
      */
     public Instrucciones() {
         initComponents();
+        this.setResizable(false);
+        File archivo;
+        FileReader fr=null;
+        try{
+            archivo=new File("Instrucciones.txt");
+            fr=new FileReader(archivo);
+            BufferedReader br=new BufferedReader(fr);
+            String linea;
+            while((linea=br.readLine())!=null){
+                contenido.setText(contenido.getText()+linea+"\n");
+            }
+        }catch(Exception e){
+            System.out.println("Error al leer archivo Instrucciones"+e);
+        }finally{
+            try{
+                if(fr!=null){
+                    fr.close();
+                }
+            }catch(Exception e){
+                System.out.println("Error cerrar archivo Instrucciones"+e);
+            }
+        }
     }
 
     /**
@@ -27,19 +49,17 @@ public class Instrucciones extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnAceptarInstrucciones = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        contenido = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setText("Instrucciones");
 
-        btnAceptarInstrucciones.setText("Aceptar");
-        btnAceptarInstrucciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarInstruccionesActionPerformed(evt);
-            }
-        });
+        contenido.setColumns(20);
+        contenido.setRows(5);
+        jScrollPane1.setViewportView(contenido);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -48,30 +68,25 @@ public class Instrucciones extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
+                        .addGap(224, 224, 224)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addComponent(btnAceptarInstrucciones)))
-                .addContainerGap(227, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
-                .addComponent(btnAceptarInstrucciones)
-                .addGap(49, 49, 49))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAceptarInstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarInstruccionesActionPerformed
-         //this.setVisible(false);
-         this.dispose();
-    }//GEN-LAST:event_btnAceptarInstruccionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,7 +124,8 @@ public class Instrucciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptarInstrucciones;
+    private javax.swing.JTextArea contenido;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
