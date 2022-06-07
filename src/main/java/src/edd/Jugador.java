@@ -16,9 +16,9 @@ public class Jugador implements Comparable, Serializable{
     int numJugadorApostado;//torneo
     double cantidadApostada;//torneo
     double cuotaAp;//torneo
-    int numJugadorApostadoCarrera;
-    double cantidadApostadaCarrera;
-    double cuotaApCarrera;
+    int numJugadorApostadoCarrera;//carrera
+    double cantidadApostadaCarrera;//carrera
+    double cuotaApCarrera;//carrera
 
     /**
      * Costructor

@@ -23,6 +23,7 @@ public class ObservadorCarrera implements Observer {
     @Override public void update(Observable o, Object lista){
         if(lista!=null){
             if(lista.getClass().equals(new Lista<Candidato>().getClass())){
+                //Ponemos los valores de la carrera del jugador en 0
                 jugador.cantidadApostadaCarrera=0;
                 jugador.cuotaApCarrera=0;
                 jugador.numJugadorApostadoCarrera=0;

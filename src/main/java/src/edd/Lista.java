@@ -530,6 +530,29 @@ public class Lista<T> implements Collection<T>, Serializable {
             return regreso;
         }  
     }//FIN DE ELIMINA EN POS
+    
+    /**
+     * Regresa el nodo que esta en la ñosicion indicada
+     * @param i El indice de posicion
+     * @return 
+     */
+    public Nodo nodoEnPos(int i){
+        Nodo regreso;
+        if (i <= 0) {
+            regreso = cabeza;
+        } else if (i >= longi) {
+            regreso = ultimo;
+        } else {
+            Nodo actual = cabeza;// Nodo para iterar la lista
+            int contador = 0;
+            while (contador != i) {
+                actual = actual.siguiente;
+                contador++;
+            }
+            regreso = actual;
+        }
+        return regreso;
+    }//FIN DE NODO EN POS
 
     /**
      * Regresa el elemento que esta en la posicion dada
@@ -745,19 +768,14 @@ public class Lista<T> implements Collection<T>, Serializable {
     public void shuffle(){
         Random random = new Random();
         int posicionAleatoria=0;
-        T elem1,elem2;
+        T elem1;
         for(int i=0;i<this.size();i++){
             posicionAleatoria=random.nextInt(this.size()-1);
-            elem1=this.elementoEnPos(i);
-            elem2=this.elementoEnPos(posicionAleatoria);
-            Nodo n1=buscaElemento(elem1);
-            Nodo n2=buscaElemento(elem2);
-            n1.cambiarElem(elem2);
-            n2.cambiarElem(elem1);
-            /*this.eliminaEnPos(i);
-            this.insert(i, elem2);
-            this.eliminaEnPos(posicionAleatoria);
-            this.insert(posicionAleatoria, elem1);*/
+            Nodo nodo1=this.nodoEnPos(i);
+            Nodo nodo2=this.nodoEnPos(posicionAleatoria);
+            elem1=nodo1.elemento;
+            nodo1.cambiarElem(nodo2.elemento);
+            nodo2.cambiarElem(elem1);
         } 
     }
 }

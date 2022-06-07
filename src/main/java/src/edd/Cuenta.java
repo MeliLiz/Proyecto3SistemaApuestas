@@ -4,6 +4,7 @@ package src.edd;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  * Clase que simula una cuenta de dinero
@@ -39,7 +40,8 @@ public class Cuenta implements Serializable{
         }else{
             saldoDisponible+=n;
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            String[] arr={"Deposito",""+n, dtf.format(LocalDateTime.now())};
+            DecimalFormat df =  new DecimalFormat("#.##");
+            String[] arr={"Deposito",""+df.format(n), dtf.format(LocalDateTime.now())};
             movimientos.add(arr);//registramos el movimiento en el historial
             return true;
         }
@@ -56,7 +58,8 @@ public class Cuenta implements Serializable{
         }else{
             saldoDisponible-=n;
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            String[] arr={"Retiro",""+n, dtf.format(LocalDateTime.now())};
+            DecimalFormat df =  new DecimalFormat("#.##");
+            String[] arr={"Retiro",""+df.format(n), dtf.format(LocalDateTime.now())};
             movimientos.add(arr);//registramos el movimiento en el historial
             return true;
         }
@@ -73,7 +76,8 @@ public class Cuenta implements Serializable{
         }else{
             saldoDisponible-=n;
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            String[] arr={"Apuesta",""+n, dtf.format(LocalDateTime.now())};
+            DecimalFormat df =  new DecimalFormat("#.##");
+            String[] arr={"Apuesta",""+df.format(n), dtf.format(LocalDateTime.now())};
             movimientos.add(arr);//registramos el movimiento en el historial
             return true;
         }
@@ -95,7 +99,8 @@ public class Cuenta implements Serializable{
     public void agregarGanada(double ganado, double apostado){
         depositar(ganado);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        String[] arr={""+apostado,""+ganado, dtf.format(LocalDateTime.now())};//registramos el movimiento en el historial
+        DecimalFormat df =  new DecimalFormat("#.##");
+        String[] arr={""+apostado,""+df.format(ganado), dtf.format(LocalDateTime.now())};//registramos el movimiento en el historial
         apuestasGanadas.add(arr);
     }// FIN DE AGREGAR GANADA
 
@@ -105,7 +110,8 @@ public class Cuenta implements Serializable{
      */
     public void agregarPerdida(double perdido){
          DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        String[] arr={""+perdido, dtf.format(LocalDateTime.now())};//registramos el movimiento en el historial
+         DecimalFormat df =  new DecimalFormat("#.##");
+        String[] arr={""+df.format(perdido), dtf.format(LocalDateTime.now())};//registramos el movimiento en el historial
         apuestasPerdidas.add(arr);
     }//FIN DE AGREGAR PERDIDA
 }

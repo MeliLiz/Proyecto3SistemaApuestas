@@ -51,14 +51,14 @@ public class ApostarCarrera extends javax.swing.JFrame {
         for(int i=0;i<competidores.size();i++){
             suma+=it.next().habilidad;
         }
-        /*it=competidores.iterator();
+        it=competidores.iterator();
         
         //Calculamos la probabilidad de cada jugador y su cuota
         for(int i=0;i<competidores.size();i++){
             Candidato actual=it.next();
             actual.probabilidadCarrera=actual.habilidad/suma;//calculamos probabilidad de ganar la carrera
             actual.cuotaCarrera=1/actual.probabilidadCarrera;//calculamos la cuota decimal
-        }*/
+        }
         it=competidores.iterator();
         for(int i=0;i<competidores.size();i++){
             Candidato actual=it.next();

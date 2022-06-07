@@ -35,7 +35,7 @@ public class MovimientosCuenta extends javax.swing.JFrame {
     private void setModelo(){
         String[] cabecera={"Movimiento","Cantidad","Hora"};
         modelo.setColumnIdentifiers(cabecera);
-        tblPaises.setModel(modelo);
+        tabla.setModel(modelo);
     }//FIN DE SETMODELO
     
     //Metodo para poner los datos en la tabla
@@ -44,7 +44,7 @@ public class MovimientosCuenta extends javax.swing.JFrame {
         for(int i=0;i<mov.size();i++){
             String[] arr=it.next();
             modelo.addRow(arr);
-            tblPaises.setModel(modelo);
+            tabla.setModel(modelo);
         }
     }//FIN DE SETDATOS
 
@@ -57,14 +57,14 @@ public class MovimientosCuenta extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblPaises = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setText("Historial de movimientos");
 
-        tblPaises.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -75,7 +75,7 @@ public class MovimientosCuenta extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblPaises);
+        jScrollPane1.setViewportView(tabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,7 +143,7 @@ public class MovimientosCuenta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblPaises;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
     
 }
